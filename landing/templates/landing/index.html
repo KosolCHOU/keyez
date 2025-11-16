@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KeyEZ — SingKhmer ➜ Khmer Keyboard</title>
+  <meta name="description" content="Type Singkhmer. Get Khmer. A futuristic AI keyboard that transliterates in real time — inspired by Pinyin, made for Khmer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Noto+Sans+Khmer:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'landing/styles.css' %}">
+</head>
+<body data-theme="dark" data-lang="en" class="text-slate-200 font-[Inter] antialiased">
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <div class="mx-auto max-w-7xl px-4">
+      <div data-animate class="glass mt-4 rounded-2xl border border-white/10 px-4 py-3 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-lime-300 flex items-center justify-center text-black font-black">K</div>
+          <span class="font-semibold tracking-tight">KeyEZ</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+          <a href="#hero" class="hover:text-white/90" data-lang-en="Home" data-lang-km="ទំព័រដើម">Home</a>
+          <a href="#social-demo" class="hover:text-white/90" data-lang-en="Demo" data-lang-km="ការបង្ហាញ">Demo</a>
+          <a href="#features" class="hover:text-white/90" data-lang-en="Features" data-lang-km="លក្ខណៈពិសេស">Features</a>
+          <a href="#handwriting" class="hover:text-white/90" data-lang-en="Canvas" data-lang-km="ផ្ទាំងសរសេរ">Canvas</a>
+          <a href="#pricing" class="hover:text-white/90" data-lang-en="Pricing" data-lang-km="តម្លៃ">Pricing</a>
+          <a href="#faq" class="hover:text-white/90" data-lang-en="FAQ" data-lang-km="សំណួរញឹកញាប់">FAQ</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" type="button" class="icon-btn" aria-label="Switch to light mode">☀</button>
+          <button id="langToggle" class="kbd-btn text-xs px-3 py-1.5 rounded-xl">EN</button>
+          <a href="#get" class="primary-cta" data-lang-en="Get KeyEZ" data-lang-km="ទទួលបាន KeyEZ">Get KeyEZ</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="relative pt-36 md:pt-40" data-glow>
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div data-animate>
+          <h1 class="text-5xl md:text-7xl font-black leading-tight gradient-text floating-accent" data-lang-en="Type Singkhmer. Get Khmer." data-lang-km="វាយ SingKhmer ទទួលបានខ្មែរ">Type Singkhmer.<br/>Get Khmer.</h1>
+          <p class="mt-6 text-lg text-slate-300" data-lang-en="A next‑gen keyboard that converts Latin input to Khmer in real time — inspired by Pinyin, crafted for Cambodia." data-lang-km="ក្តារចុចជំនាន់ថ្មីដែលបម្លែងអក្សរឡាតាំងទៅជាខ្មែរក្នុងពេលវេលាជាក់ស្តែង — ទទួលបានការបំផុសគំនិតពី Pinyin សម្រាប់កម្ពុជា។">A next‑gen keyboard that converts Latin input to Khmer in real time — inspired by Pinyin, crafted for Cambodia.</p>
+          <div class="mt-8 flex items-center gap-3">
+            <a href="#social-demo" class="primary-cta" data-lang-en="Try Live Demo" data-lang-km="សាកល្បងបង្ហាញផ្ទាល់">Try Live Demo</a>
+            <a href="#features" class="secondary-cta" data-lang-en="See how it works" data-lang-km="មើលរបៀបដំណើរការ">See how it works</a>
+          </div>
+          <div class="mt-6 text-xs text-slate-400" data-lang-en="Built with AI transliteration • Offline mode • Candidate bar • Smart autocorrect" data-lang-km="បង្កើតដោយបកប្រែ AI • របៀបក្រៅបណ្តាញ • របារបេក្ខជន • កែតម្រូវស្វ័យប្រវត្តិឆ្លាត">Built with AI transliteration • Offline mode • Candidate bar • Smart autocorrect</div>
+        </div>
+        <div class="relative" data-animate>
+          <div class="shine rounded-3xl card p-6 panel-stack">
+            <!-- PHONE MOCKUP -->
+            <div class="relative mx-auto max-w-sm">
+            <img src="{% static 'landing/img/Screenshot_13-Nov_19-22-33_18953-removebg-preview.png' %}" 
+              alt="iPhone keyboard demo" 
+              class="w-full rounded-2xl">
+            </div>
+            <!-- END PHONE -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL POST DEMO -->
+  <section id="social-demo" class="py-24 relative overflow-hidden" data-glow>
+    <!-- Decorative gradient orbs -->
+    <div class="absolute top-20 left-10 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl"></div>
+    
+    <div class="mx-auto max-w-6xl px-4 relative z-10">
+      <div class="text-center mb-16" data-animate>
+        <h2 class="text-4xl md:text-6xl font-black floating-accent mb-6 demo-gradient-text leading-tight pt-2 pb-1">
+          Type in your way — we’ll handle the rest
+        </h2>
+      </div>
+
+      <div data-animate>
+        <div class="max-w-3xl mx-auto p-3 md:p-6">
+          <textarea id="fbInput" rows="4" placeholder="Type in SingKhmer and see it come to life in Khmer"
+            class="w-full rounded-xl p-3 resize-none"></textarea>
+          <div id="fbCandidates" role="listbox" aria-label="Khmer word suggestions" class="mt-2"></div>
+          <div id="fbKeyboard" class="mt-2 pb-2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-24" data-glow>
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-14 floating-accent" data-animate>Designed like a keyboard. Built like a platform.</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-300 flex items-center justify-center text-black font-black dot">AI</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="AI Transliteration" data-lang-km="បកប្រែដោយ AI">AI Transliteration</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Neural models map Latin input to Khmer in real time with context‑aware candidate ranking." data-lang-km="ម៉ូដែលណឺរ៉ាល់បកប្រែអក្សរឡាតាំងទៅខ្មែរក្នុងពេលវេលាជាក់ស្តែងជាមួយនឹងការចាត់ថ្នាក់បេក្ខជនតាមបរិបទ។">Neural models map Latin input to Khmer in real time with context‑aware candidate ranking.</p>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-400 to-cyan-300 flex items-center justify-center text-black font-black dot">手</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="Handwriting Canvas" data-lang-km="ផ្ទាំងសរសេរដោយដៃ">Handwriting Canvas</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Draw Khmer letters; we recognize strokes and insert clean text. Great for learning." data-lang-km="គូរអក្សរខ្មែរ យើងស្គាល់ការគូរ និងបញ្ចូលអក្សរស្អាត។ ល្អសម្រាប់ការរៀន។">Draw Khmer letters; we recognize strokes and insert clean text. Great for learning.</p>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-pink-400 flex items-center justify-center text-black font-black dot">∞</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="Offline & Fast" data-lang-km="ក្រៅបណ្តាញ និងលឿន">Offline & Fast</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Optimized for low connectivity using compact on‑device models and caching." data-lang-km="បង្កើនប្រសិទ្ធភាពសម្រាប់ការតភ្ជាប់ទាប ប្រើម៉ូដែលឧបករណ៍តូច និងសន្ស័យ។">Optimized for low connectivity using compact on‑device models and caching.</p>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-lime-300 to-teal-300 flex items-center justify-center text-black font-black dot">⇆</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="Switch Seamlessly" data-lang-km="ប្តូររលូន">Switch Seamlessly</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Tap once to toggle EN/KH. Autocorrect respects Khmer orthography." data-lang-km="ចុចម្តងដើម្បីប្តូរ EN/KH។ កែតម្រូវស្វ័យប្រវត្តិគោរពអក្ខរក្រមខ្មែរ។">Tap once to toggle EN/KH. Autocorrect respects Khmer orthography.</p>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-300 to-white flex items-center justify-center text-black font-black dot">☁</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="Sync & Privacy" data-lang-km="ធ្វើសមកាលកម្ម និងឯកជនភាព">Sync & Privacy</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Opt‑in learning with private, anonymized telemetry. Your words stay yours." data-lang-km="ការរៀនដោយជម្រើសជាមួយការវាស់ស្ទង់ឯកជន។ ពាក្យរបស់អ្នកនៅជារបស់អ្នក។">Opt‑in learning with private, anonymized telemetry. Your words stay yours.</p>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-300 to-indigo-300 flex items-center justify-center text-black font-black dot">⚙</div>
+            <h3 class="mt-4 text-xl font-bold" data-lang-en="Themes & API" data-lang-km="ប្រធានបទ និង API">Themes & API</h3>
+            <p class="text-slate-300 mt-2" data-lang-en="Custom themes, and an API for apps & schools to transliterate at scale." data-lang-km="ប្រធានបទផ្ទាល់ខ្លួន និង API សម្រាប់កម្មវិធី និងសាលារៀនដើម្បីបកប្រែក្នុងមាត្រដ្ឋានធំ។">Custom themes, and an API for apps & schools to transliterate at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDWRITING CANVAS (placeholder) -->
+  <section id="handwriting" class="py-24" data-glow>
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div data-animate>
+          <h2 class="text-4xl font-extrabold floating-accent">Write it. We read it.</h2>
+          <p class="text-slate-300 mt-3">Practice Khmer in a canvas and convert to clean text. Stroke‑aware recognition helps learners build muscle memory.</p>
+          <ul class="mt-6 space-y-2 text-slate-300 list-disc list-inside">
+            <li>Real‑time stroke capture</li>
+            <li>Adaptive smoothing</li>
+            <li>Instant insert to chat</li>
+          </ul>
+        </div>
+        <div class="card rounded-3xl p-6 panel-stack" data-animate>
+          <!-- Output display with live word building -->
+          <div class="mb-3">
+            <textarea id="canvasOutput" rows="2" placeholder="Draw letters below - they'll be recognized automatically"
+              class="w-full rounded-xl p-3 resize-none text-lg"></textarea>
+          </div>
+          
+          <!-- Canvas for drawing -->
+          <div class="relative">
+            <canvas id="pad" width="600" height="280" class="w-full rounded-2xl bg-white"></canvas>
+            <!-- Live recognition preview -->
+            <div id="liveRecognition" class="absolute top-2 right-2 bg-black/60 text-white px-3 py-1 rounded-lg text-sm font-mono opacity-0 transition-opacity">
+              <span id="recognizedChar">?</span>
+              <span id="recognizedConfidence" class="text-xs ml-2 text-cyan-300"></span>
+            </div>
+          </div>
+          
+          <!-- Current word being built -->
+          <div id="currentWord" class="mt-2 text-center text-lg font-mono text-cyan-400 min-h-[2rem] flex items-center justify-center">
+            <span class="opacity-50">Type letters to build words...</span>
+          </div>
+          
+          <!-- Candidate bar (iOS style) for Khmer suggestions -->
+          <div id="canvasCandidates" role="listbox" aria-label="Khmer word suggestions" class="mt-2"></div>
+          
+          <!-- Action buttons -->
+          <div class="flex gap-3 mt-3">
+            <button id="clearPad" class="secondary-cta">Clear Letter</button>
+            <button id="clearWord" class="secondary-cta">Clear Word</button>
+            <button id="addSpace" class="secondary-cta">Space</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-24" data-glow>
+    <div class="mx-auto max-w-6xl px-4 text-center">
+      <h2 class="text-4xl md:text-5xl font-extrabold floating-accent" data-animate>Start free. Go gold when you love it.</h2>
+      <p class="text-slate-300 mt-3" data-animate>Freemium for everyone; Gold unlocks offline, canvas, and unlimited transliteration.</p>
+      <div class="grid md:grid-cols-2 gap-6 mt-10">
+        <div class="card rounded-3xl p-8 text-left panel-stack">
+          <h3 class="text-2xl font-bold">Freemium</h3>
+          <p class="text-slate-300">Great to start.</p>
+          <ul class="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+            <li>Daily character quota</li>
+            <li>Core transliteration</li>
+            <li>Smart candidate bar</li>
+          </ul>
+          <a href="#get" class="mt-6 inline-block primary-cta">Get Free</a>
+        </div>
+        <div class="card premium rounded-3xl p-8 text-left panel-stack">
+          <div class="badge-premium">★ Most Popular</div>
+          <h3 class="text-2xl font-bold">Gold</h3>
+          <p class="text-slate-300">$0.99 / month • $9.99 / year</p>
+          <ul class="mt-4 space-y-2 text-slate-300">
+            <li>Unlimited transliteration</li>
+            <li>Offline mode</li>
+            <li>Handwriting canvas</li>
+            <li>Themes & personalization</li>
+          </ul>
+          <a href="#get" class="mt-6 inline-block primary-cta premium-cta">Go Gold</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24" data-glow>
+    <div class="mx-auto max-w-5xl px-4">
+      <h2 class="text-4xl font-extrabold text-center mb-10 floating-accent" data-animate>FAQ</h2>
+      <div class="space-y-6">
+
+        <details class="card rounded-2xl p-5 panel-stack">
+          <summary class="font-semibold">What problem does KeyEZ solve?</summary>
+          <p class="mt-2 text-slate-300">
+            Cambodian Gen Z increasingly uses <em>SingKhmer</em> (Latin Khmer) for texting,
+            which causes a decline in real Khmer script usage.
+            <strong>KeyEZ</strong> solves this by converting SingKhmer to proper Khmer instantly —
+            making Khmer typing fast, natural, and accessible again.
+          </p>
+        </details>
+
+        <details class="card rounded-2xl p-5 panel-stack">
+          <summary class="font-semibold">How does KeyEZ work?</summary>
+          <p class="mt-2 text-slate-300">
+            It uses <strong>AI transliteration</strong> — a Seq2Seq Transformer model trained on thousands
+            of SingKhmer–Khmer pairs — to map Latin sounds to correct Khmer letters.
+            It also features a <strong>handwriting canvas</strong> that recognizes drawn Khmer letters
+            and turns them into clean digital text.
+          </p>
+        </details>
+
+        <details class="card rounded-2xl p-5 panel-stack">
+          <summary class="font-semibold">Who is KeyEZ for?</summary>
+          <p class="mt-2 text-slate-300">
+            KeyEZ is built for <strong>students, creators, and young professionals</strong> aged 13–30
+            who often type in SingKhmer on social media or chat apps but want to write properly
+            in Khmer without slowing down.
+          </p>
+        </details>
+
+        <details class="card rounded-2xl p-5 panel-stack">
+          <summary class="font-semibold">Does KeyEZ need internet to work?</summary>
+          <p class="mt-2 text-slate-300">
+            No. The <strong>Gold version</strong> runs fully offline using compact on-device models.
+            The <strong>Free version</strong> may use online suggestions for better accuracy.
+          </p>
+        </details>
+
+        <details class="card rounded-2xl p-5 panel-stack">
+          <summary class="font-semibold">How does KeyEZ support education in Cambodia?</summary>
+          <p class="mt-2 text-slate-300">
+            KeyEZ helps students practice and master Khmer spelling, grammar, and handwriting
+            through real-time transliteration and canvas writing.
+            It promotes <strong>Khmer literacy and identity</strong> while fitting naturally
+            into digital learning environments.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-16 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 flex flex-col md:flex-row items-center justify-between gap-6 panel-stack" data-animate>
+      <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-lime-300 flex items-center justify-center text-black font-black">K</div>
+        <div>
+          <div class="font-semibold">KeyEZ</div>
+          <div class="text-xs text-slate-400">© <span id="y"></span> AstroAI • Made in Cambodia</div>
+        </div>
+      </a>
+      <div class="text-sm text-slate-400">Privacy • Terms • Contact</div>
+    </div>
+  </footer>
+
+  <script src="{% static 'landing/script.js' %}"></script>
+</body>
+</html>
