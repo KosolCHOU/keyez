@@ -631,8 +631,8 @@ if(canvasOutput){
       return
     }
     
-    // Space accepts middle (best) candidate
-    if(e.key === ' '){
+    // Enter accepts middle (best) candidate (changed from Space to allow normal space typing for English)
+    if(e.key === 'Enter'){
       const mid = canvasCandidates.querySelector('.slot[data-idx="1"]:not([disabled])')
       if(mid){ 
         mid.click()
@@ -954,8 +954,8 @@ function initSocialDemo(){
       if(btn){ btn.click(); e.preventDefault(); }
       return;
     }
-    // Space = accept middle (best) if available
-    if(e.key === ' '){
+    // Enter = accept middle (best) candidate (was Space; Space now inserts spaces normally)
+    if(e.key === 'Enter'){
       const mid = fbCandidates.querySelector('.slot[data-idx="1"]:not([disabled])');
       if(mid){ mid.click(); e.preventDefault(); return; }
     }
