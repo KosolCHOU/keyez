@@ -183,28 +183,89 @@
     <div class="mx-auto max-w-6xl px-4 text-center">
       <h2 class="text-4xl md:text-5xl font-extrabold floating-accent" data-animate>Start free. Go gold when you love it.</h2>
       <p class="text-slate-300 mt-3" data-animate>Freemium for everyone; Gold unlocks offline, canvas, and unlimited transliteration.</p>
-      <div class="grid md:grid-cols-2 gap-6 mt-10">
-        <div class="card rounded-3xl p-8 text-left panel-stack">
-          <h3 class="text-2xl font-bold">Freemium</h3>
-          <p class="text-slate-300">Great to start.</p>
-          <ul class="mt-4 space-y-2 text-slate-300 list-disc list-inside">
-            <li>Daily character quota</li>
-            <li>Core transliteration</li>
-            <li>Smart candidate bar</li>
-          </ul>
-          <a href="#get" class="mt-6 inline-block primary-cta">Get Free</a>
-        </div>
-        <div class="card premium rounded-3xl p-8 text-left panel-stack">
-          <div class="badge-premium">★ Most Popular</div>
-          <h3 class="text-2xl font-bold">Gold</h3>
-          <p class="text-slate-300">$0.99 / month • $9.99 / year</p>
-          <ul class="mt-4 space-y-2 text-slate-300">
-            <li>Unlimited transliteration</li>
-            <li>Offline mode</li>
-            <li>Handwriting canvas</li>
-            <li>Themes & personalization</li>
-          </ul>
-          <a href="#get" class="mt-6 inline-block primary-cta premium-cta">Go Gold</a>
+        <div class="grid md:grid-cols-3 gap-6 mt-10">
+          <!-- Freemium Card -->
+          <div class="card rounded-3xl p-8 text-left panel-stack hover:scale-105 transition-transform duration-300 border border-white/5">
+            <div class="flex items-center justify-between mb-4">
+            </div>
+            <h3 class="text-3xl font-black mb-2">Freemium</h3>
+            <p class="text-slate-400 text-sm mb-1">Perfect for getting started</p>
+            <div class="text-4xl font-black mb-6">
+              <span class="bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">$0</span>
+              <span class="text-lg text-slate-400 font-normal">/month</span>
+            </div>
+            <ul class="space-y-3 text-slate-300 mb-8">
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">✓</span>
+                <span>Singkhmer-to-Khmer script conversion</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">✓</span>
+                <span>Handwriting recognition canvas</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400 mt-1">✓</span>
+                <span>Basic grammar checker (limited)</span>
+              </li>
+            </ul>
+            <a href="#get" class="w-full text-center block primary-cta">Get Started Free</a>
+          </div>
+
+          <!-- Gold Card (Premium) -->
+          <div class="card premium rounded-3xl p-8 text-left panel-stack hover:scale-105 transition-transform duration-300 border-2 border-amber-500/50 shadow-2xl shadow-amber-500/20 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-transparent rounded-full blur-3xl"></div>
+            <div class="badge-premium absolute -top-1 -right-1">★ Most Popular</div>
+            <div class="flex items-center justify-between mb-4 relative z-10">
+        
+            </div>
+            <h3 class="text-3xl font-black mb-2 bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent relative z-10">Gold</h3>
+            <p class="text-slate-300 text-sm mb-1 relative z-10">For professional uses</p>
+            <div class="relative z-10 mb-6">
+              <div class="text-5xl font-black mb-1">
+                <span class="bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent">$1.50</span>
+                <span class="text-xl text-slate-400 font-normal">USD</span>
+              </div>
+              <p class="text-sm text-slate-400">/month</p>
+            </div>
+            <ul class="space-y-3 text-slate-300 mb-8 relative z-10">
+              <li class="flex items-start gap-3">
+                <span>Everything in Freemium</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span>Advanced grammar checker integrated</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span>Unlimited vocabulary search</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span>Priority support</span>
+              </li>
+            </ul>
+            <a href="#get" class="w-full text-center block primary-cta premium-cta relative z-10 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500">Upgrade to Gold</a>
+          </div>
+
+          <!-- For 10 months Payment -->
+          <div class="card api rounded-3xl p-8 text-left panel-stack hover:scale-105 transition-transform duration-300 border border-cyan-500/30">
+            <div class="flex items-center justify-between mb-4">
+            </div>
+            <h3 class="text-3xl font-black mb-2 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Diamond</h3>
+            <p class="text-slate-400 text-sm mb-1">For 10 months uses</p>
+            <div class="text-2xl font-semibold mb-8 mt-4">
+              <span class="bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent">$12.99</span>
+              <span class="text-xl text-slate-400 font-normal">USD</span>
+            </div>
+            <ul class="space-y-3 text-slate-300 mb-8">
+              <li class="flex items-start gap-2">
+                <span class="text-cyan-400 mt-1">⚡</span>
+                <span>Associate with membership</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-cyan-400 mt-1">⚡</span>
+                <span>Includes both Freemium and Gold features</span>
+              </li>
+            </ul>
+            <a href="#get" class="w-full text-center block primary-cta bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500">Upgrade to Diamond</a>
+          </div>
         </div>
       </div>
     </div>

@@ -289,25 +289,32 @@ if(input){
 
 // number keys 1-3 to pick candidate (context-aware: main demo, social demo, or canvas)
 window.addEventListener('keydown', (e)=>{
-  if(!/^[1-3]$/.test(e.key)) return
-  const idx = Number(e.key)-1
   const ae = document.activeElement
   const fbC = document.getElementById('fbCandidates')
   const canvasC = document.getElementById('canvasCandidates')
   let target = null
-  
-  // Check which candidate bar should respond
-  if(ae && ae.id === 'fbInput' && fbC){
-    target = fbC
-  } else if(ae && ae.id === 'canvasOutput' && canvasC){
-    target = canvasC
-  } else if(cand){
-    target = cand
+  // Number keys 1-3 still pick candidates
+  if(/^[1-3]$/.test(e.key)) {
+    if(ae && ae.id === 'fbInput' && fbC){
+      target = fbC
+    } else if(ae && ae.id === 'canvasOutput' && canvasC){
+      target = canvasC
+    } else if(cand){
+      target = cand
+    }
+    if(!target) return
+    const children = Array.from(target.children)
+    const idx = Number(e.key)-1
+    if(children[idx]) children[idx].click()
+    return
   }
-  
-  if(!target) return
-  const children = Array.from(target.children)
-  if(children[idx]) children[idx].click()
+  // Enter key picks the middle candidate in the main bar
+  if(e.key === 'Enter' && cand && document.activeElement === input) {
+    const mid = cand.children[1]
+    if(mid) mid.click()
+    e.preventDefault()
+    return
+  }
 })
 
 // Canvas handwriting demo with auto-recognition
