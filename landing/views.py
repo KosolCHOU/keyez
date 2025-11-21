@@ -156,3 +156,61 @@ def transliterate(request):
         print(f"Transliteration error: {e}")
         print(traceback.format_exc())
         return JsonResponse({'error': str(e), 'success': False}, status=500)
+
+# Grammar checker view
+from .grammar_checker import analyze_sentence, get_predictor
+import numpy as np
+
+def convert_to_serializable(obj):
+    """Convert numpy types to native Python types for JSON serialization"""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_to_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_serializable(item) for item in obj]
+    return obj
+
+def grammar_checker(request):
+    """Render grammar checker page allowing Khmer sentence validation."""
+    # Handle AJAX requests
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.method == 'POST':
+            sentence = request.POST.get('sentence', '').strip()
+            if not sentence:
+                return JsonResponse({'error': 'Please enter a sentence.'}, status=400)
+            try:
+                result = analyze_sentence(sentence)
+                # Convert numpy types to native Python types
+                result = convert_to_serializable(result)
+                return JsonResponse({'result': result})
+            except Exception as e:
+                import traceback
+                print(f"Grammar check error: {e}")
+                print(traceback.format_exc())
+                return JsonResponse({'error': str(e)}, status=500)
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+    # Handle regular page requests
+    context = {
+        'result': None,
+        'error': None,
+        'sentence': '',
+        'loaded': get_predictor() is not None,
+    }
+    if request.method == 'POST':
+        sentence = request.POST.get('sentence', '').strip()
+        context['sentence'] = sentence
+        if sentence:
+            try:
+                result = analyze_sentence(sentence)
+                context['result'] = result
+            except Exception as e:
+                context['error'] = str(e)
+        else:
+            context['error'] = 'Please enter a sentence.'
+    return render(request, 'landing/grammar_checker.html', context)

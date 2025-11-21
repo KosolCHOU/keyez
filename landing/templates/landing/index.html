@@ -26,6 +26,7 @@
           <a href="#social-demo" class="hover:text-white/90" data-lang-en="Demo" data-lang-km="ការបង្ហាញ">Demo</a>
           <a href="#features" class="hover:text-white/90" data-lang-en="Features" data-lang-km="លក្ខណៈពិសេស">Features</a>
           <a href="#handwriting" class="hover:text-white/90" data-lang-en="Canvas" data-lang-km="ផ្ទាំងសរសេរ">Canvas</a>
+          <a href="#grammar" class="hover:text-white/90" data-lang-en="Grammar" data-lang-km="វេយ្យាករណ៍">Grammar</a>
           <a href="#pricing" class="hover:text-white/90" data-lang-en="Pricing" data-lang-km="តម្លៃ">Pricing</a>
           <a href="#faq" class="hover:text-white/90" data-lang-en="FAQ" data-lang-km="សំណួរញឹកញាប់">FAQ</a>
         </nav>
@@ -172,6 +173,98 @@
             <button id="clearPad" class="secondary-cta">Clear Letter</button>
             <button id="clearWord" class="secondary-cta">Clear Word</button>
             <button id="addSpace" class="secondary-cta">Space</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAMMAR CHECKER SECTION -->
+  <section id="grammar" class="py-24" data-glow>
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="card rounded-3xl p-6 panel-stack" data-animate>
+          <h2 class="text-4xl font-extrabold floating-accent mb-4">AI-Powered Grammar Checker</h2>
+          <p class="text-slate-300 mb-4">Validate your Khmer sentences with our advanced neural grammar checker. Get instant feedback on correctness, grammar structure, and semantic coherence.</p>
+          
+          <div class="space-y-3 text-slate-300">
+            <div class="flex items-start gap-3">
+              <span class="text-cyan-400 text-xl">✓</span>
+              <div>
+                <strong>BiGRU Neural Network</strong>
+                <p class="text-sm text-slate-400">Deep learning model trained on thousands of Khmer sentences</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-cyan-400 text-xl">✓</span>
+              <div>
+                <strong>Multi-Feature Analysis</strong>
+                <p class="text-sm text-slate-400">Grammar score, semantic coherence, POS tagging, vocabulary coverage</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-cyan-400 text-xl">✓</span>
+              <div>
+                <strong>Smart Error Detection</strong>
+                <p class="text-sm text-slate-400">Identifies unknown words, missing components, and structural issues</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-cyan-400 text-xl">✓</span>
+              <div>
+                <strong>FastText Embeddings</strong>
+                <p class="text-sm text-slate-400">300-dimensional word vectors for semantic understanding</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-animate>
+          <div class="card rounded-2xl p-6 panel-stack bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-cyan-500/30">
+            <h3 class="text-xl font-bold mb-4 text-cyan-300">Try It Live</h3>
+            
+            <!-- Grammar Input Form -->
+            <div class="mb-4">
+              <textarea id="grammarInput" rows="3" 
+                placeholder="វាយប្រយោគខ្មែររបស់អ្នកនៅទីនេះ... (Type your Khmer sentence here...)"
+                class="w-full rounded-xl p-3 bg-slate-800 border border-slate-600 focus:border-cyan-400 focus:outline-none text-slate-200 font-['Noto_Sans_Khmer']"></textarea>
+              <div class="flex gap-2 mt-2">
+                <button id="checkGrammarBtn" class="primary-cta text-sm py-2 px-4">
+                  Check Grammar
+                </button>
+                <button id="clearGrammarBtn" class="secondary-cta text-sm py-2 px-4">
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="grammarLoading" class="hidden text-center py-4">
+              <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400"></div>
+              <p class="text-sm text-slate-400 mt-2">Analyzing...</p>
+            </div>
+
+            <!-- Results Display -->
+            <div id="grammarResult" class="hidden">
+              <!-- Result will be injected here by JavaScript -->
+            </div>
+
+            <!-- Example buttons -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              <button class="grammar-example text-xs px-3 py-1 rounded-lg bg-slate-700/50 hover:bg-slate-700 border border-slate-600" data-text="កុមារកម្ពុជាទៅសាលារៀននៅព្រឹកនេះ">
+                Example 1
+              </button>
+              <button class="grammar-example text-xs px-3 py-1 rounded-lg bg-slate-700/50 hover:bg-slate-700 border border-slate-600" data-text="ខ្ញុំចង់ញ៉ាំបាយនិងបន្លែជាមួយគ្រួសារ">
+                Example 2
+              </button>
+              <button class="grammar-example text-xs px-3 py-1 rounded-lg bg-slate-700/50 hover:bg-slate-700 border border-slate-600" data-text="នៅទីនេះដើម្បីរៀនភាសាខ្មែរ">
+                Example 3
+              </button>
+            </div>
+
+            <div class="mt-4 text-xs text-slate-500 text-center">
+              Powered by BiGRU + Transformers + FastText
+            </div>
           </div>
         </div>
       </div>

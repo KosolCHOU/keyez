@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Khmer Grammar Checker • KeyEZ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'landing/styles.css' %}">
+</head>
+<body class="bg-slate-950 text-slate-200 font-[Inter]">
+  <div class="mx-auto max-w-5xl px-4 py-10">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-black bg-gradient-to-r from-cyan-400 to-lime-300 bg-clip-text text-transparent">Khmer Grammar Checker</h1>
+      <a href="/" class="text-sm text-cyan-400 hover:underline">← Back</a>
+    </div>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <textarea name="sentence" rows="3" placeholder="វាយពាក្យឬប្រយោគខ្មែរនៅទីនេះ" class="w-full rounded-xl p-4 bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400" required>{{ sentence }}</textarea>
+      <div class="flex gap-3">
+        <button type="submit" class="primary-cta">Analyze</button>
+        <button type="reset" onclick="document.querySelector('[name=sentence]').value=''" class="secondary-cta">Clear</button>
+      </div>
+    </form>
+
+    {% if error %}
+      <div class="mt-6 p-4 rounded-xl bg-red-900/40 border border-red-700 text-sm">⚠ {{ error }}</div>
+    {% endif %}
+
+    {% if result %}
+      <div class="mt-8 p-5 rounded-2xl border {{ 'border-green-500/50 bg-green-900/20' if result.prediction == 'Correct' else 'border-red-500/50 bg-red-900/20' }}">
+        <h2 class="text-xl font-bold flex items-center gap-2">
+          {% if result.prediction == 'Correct' %}✅{% else %}❌{% endif %}
+          Prediction: <span class="font-mono">{{ result.prediction }}</span>
+        </h2>
+        <p class="text-sm mt-1">Confidence: {{ result.confidence|floatformat:2 }}</p>
+      </div>
+
+      {% with f=result.features %}
+      <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="space-y-4">
+          <div class="card p-4 rounded-xl bg-slate-900/60 border border-slate-700">
+            <h3 class="font-semibold mb-2">Scores</h3>
+            <ul class="text-sm space-y-1">
+              <li>Grammar Score: <span class="font-mono">{{ f.grammar_score|floatformat:3 }}</span></li>
+              <li>Semantic Coherence: <span class="font-mono">{{ f.semantic_coherence|floatformat:3 }}</span></li>
+              <li>OOV Ratio: <span class="font-mono">{{ f.oov_ratio|floatformat:3 }}</span></li>
+              <li>Length: <span class="font-mono">{{ f.sentence_length }}</span></li>
+            </ul>
+          </div>
+          <div class="card p-4 rounded-xl bg-slate-900/60 border border-slate-700">
+            <h3 class="font-semibold mb-2">Out-of-Vocabulary Words</h3>
+            {% if f.oov_words %}
+              <div class="flex flex-wrap gap-2">
+                {% for w in f.oov_words %}
+                  <span class="px-2 py-1 rounded-lg bg-red-800/40 border border-red-600 text-xs">{{ w }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="text-xs text-slate-400">None detected.</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="card p-4 rounded-xl bg-slate-900/60 border border-slate-700">
+            <h3 class="font-semibold mb-2">Tokens</h3>
+            <div class="flex flex-wrap gap-2">
+              {% for t in f.tokens %}
+                <span class="px-2 py-1 rounded-lg bg-slate-800 text-xs">{{ t }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card p-4 rounded-xl bg-slate-900/60 border border-slate-700">
+            <h3 class="font-semibold mb-2">POS Tags</h3>
+            <div class="flex flex-wrap gap-2">
+              {% for t in f.pos_tags %}
+                <span class="px-2 py-1 rounded-lg bg-cyan-800/40 border border-cyan-600 text-xs">{{ t }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endwith %}
+
+      {% if result.prediction == 'Incorrect' %}
+        <div class="mt-8 p-4 rounded-xl bg-yellow-900/30 border border-yellow-600">
+          <h3 class="font-semibold mb-2">Heuristic Hints</h3>
+          <ul class="text-xs space-y-1">
+            {% if result.features.oov_words %}<li>• Unknown words may be misspellings.</li>{% endif %}
+            {% if result.features.grammar_score < 0.6 %}<li>• Grammar pattern seems weak; check subject/verb/object.</li>{% endif %}
+            {% if result.features.semantic_coherence < 0.4 %}<li>• Words may be out of context; review ordering.</li>{% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <div class="mt-10 text-center text-xs text-slate-500">Powered by BiGRU + FastText • Models cached in memory.</div>
+  </div>
+</body>
+</html>

@@ -1410,3 +1410,156 @@ const onInputChanged = debounce(async (e)=>{
   if(typeof renderCandidates === 'function') renderCandidates([]);
 })();
 
+
+// ============================================
+// GRAMMAR CHECKER (Live on Homepage)
+// ============================================
+(function() {
+  const grammarInput = document.getElementById('grammarInput');
+  const checkBtn = document.getElementById('checkGrammarBtn');
+  const clearBtn = document.getElementById('clearGrammarBtn');
+  const loadingDiv = document.getElementById('grammarLoading');
+  const resultDiv = document.getElementById('grammarResult');
+  const exampleBtns = document.querySelectorAll('.grammar-example');
+
+  if (!grammarInput || !checkBtn) return;
+
+  // Example buttons
+  exampleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.getAttribute('data-text');
+      grammarInput.value = text;
+      checkGrammar();
+    });
+  });
+
+  // Clear button
+  clearBtn?.addEventListener('click', () => {
+    grammarInput.value = '';
+    resultDiv.classList.add('hidden');
+    resultDiv.innerHTML = '';
+  });
+
+  // Check button
+  checkBtn.addEventListener('click', checkGrammar);
+
+  // Enter key
+  grammarInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      checkGrammar();
+    }
+  });
+
+  function checkGrammar() {
+    const sentence = grammarInput.value.trim();
+    if (!sentence) {
+      alert('Please enter a Khmer sentence.');
+      return;
+    }
+
+    // Show loading
+    resultDiv.classList.add('hidden');
+    loadingDiv.classList.remove('hidden');
+
+    // Make API call
+    fetch('/grammar-checker/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: new URLSearchParams({
+        'sentence': sentence,
+        'csrfmiddlewaretoken': getCsrfToken()
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      loadingDiv.classList.add('hidden');
+      displayResult(data);
+    })
+    .catch(error => {
+      loadingDiv.classList.add('hidden');
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = `
+        <div class="p-4 rounded-xl bg-red-900/30 border border-red-500/50">
+          <p class="text-red-300 text-sm">❌ Error: ${error.message}</p>
+        </div>
+      `;
+    });
+  }
+
+  function displayResult(data) {
+    resultDiv.classList.remove('hidden');
+    
+    if (data.error) {
+      resultDiv.innerHTML = `
+        <div class="p-4 rounded-xl bg-red-900/30 border border-red-500/50">
+          <p class="text-red-300 text-sm">⚠ ${data.error}</p>
+        </div>
+      `;
+      return;
+    }
+
+    const result = data.result;
+    const features = result.features;
+    const isCorrect = result.prediction === 'Correct';
+    const bgColor = isCorrect ? 'bg-green-900/20 border-green-500/30' : 'bg-red-900/20 border-red-500/30';
+    const textColor = isCorrect ? 'text-green-300' : 'text-red-300';
+    const icon = isCorrect ? '✅' : '❌';
+
+    let html = `
+      <div class="p-4 rounded-xl ${bgColor} border">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="${textColor} text-2xl">${icon}</span>
+          <span class="font-semibold ${textColor}">${result.prediction}</span>
+          <span class="text-xs text-slate-400 ml-auto">Confidence: ${(result.confidence * 100).toFixed(1)}%</span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+          <div><span class="text-slate-400">Grammar:</span> <span class="font-mono ${getScoreColor(features.grammar_score)}">${features.grammar_score.toFixed(3)}</span></div>
+          <div><span class="text-slate-400">Coherence:</span> <span class="font-mono ${getScoreColor(features.semantic_coherence)}">${features.semantic_coherence.toFixed(3)}</span></div>
+          <div><span class="text-slate-400">OOV Ratio:</span> <span class="font-mono ${getScoreColor(1 - features.oov_ratio)}">${features.oov_ratio.toFixed(3)}</span></div>
+          <div><span class="text-slate-400">Length:</span> <span class="font-mono text-slate-300">${features.sentence_length} words</span></div>
+        </div>
+
+        <div class="flex flex-wrap gap-1 mb-2">
+          ${features.tokens.map(token => {
+            const isOOV = features.oov_words.includes(token);
+            return `<span class="px-2 py-0.5 rounded text-xs ${isOOV ? 'bg-red-800/40 border border-red-600' : 'bg-slate-700/50'}">${token}</span>`;
+          }).join('')}
+        </div>
+
+        ${features.oov_words.length > 0 ? `
+          <div class="text-xs text-yellow-300 bg-yellow-900/30 p-2 rounded mt-2">
+            <strong>⚠ Unknown words:</strong> ${features.oov_words.join(', ')}
+          </div>
+        ` : ''}
+
+        ${!isCorrect && features.grammar_score < 0.6 ? `
+          <div class="text-xs text-orange-300 bg-orange-900/30 p-2 rounded mt-2">
+            <strong>💡 Hint:</strong> Grammar structure seems weak. Check subject-verb-object order.
+          </div>
+        ` : ''}
+      </div>
+    `;
+
+    resultDiv.innerHTML = html;
+  }
+
+  function getScoreColor(score) {
+    if (score >= 0.7) return 'text-green-400';
+    if (score >= 0.5) return 'text-yellow-400';
+    return 'text-red-400';
+  }
+
+  function getCsrfToken() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [name, value] = cookie.trim().split('=');
+      if (name === 'csrftoken') return value;
+    }
+    return '';
+  }
+})();
