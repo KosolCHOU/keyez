@@ -10,8 +10,8 @@ import threading
 # Paths - Use absolute paths for Django context
 BASE_DIR = Path(__file__).resolve().parent
 FASTTEXT_PATH = '/home/kosol/khmer_text/cc.km.300.bin'  # Absolute path to FastText model
-GRU_MODEL_PATH = BASE_DIR / 'model' / 'final_cv_based_gru.pth'
-GRU_FALLBACK_PATH = BASE_DIR / 'model' / 'best_gru_model_state_dict.pth'
+GRU_MODEL_PATH = BASE_DIR / 'model' / 'gru_model.pth'
+GRU_FALLBACK_PATH = BASE_DIR / 'model' / 'final_cv_based_gru.pth'
 POS_MODEL_NAME = 'seanghay/khmer-pos-roberta'
 
 _lock = threading.Lock()
