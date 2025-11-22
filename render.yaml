@@ -3,7 +3,7 @@ services:
     name: keyez
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn keyez_site.wsgi:application --bind 0.0.0.0:$PORT"
+    startCommand: "gunicorn keyez_site.wsgi:application --config gunicorn_config.py"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
